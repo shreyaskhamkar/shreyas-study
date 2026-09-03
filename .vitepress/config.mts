@@ -33,6 +33,7 @@ export default defineConfig({
         firstSemester('Persistent Data Management', 'persistent-data-management', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
         firstSemester('Processor Architecture and Design', 'Processor-Architecture-and-Design', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
         firstSemester('Programming from First Principles', 'programming-from-first-principles', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]),
+        { text: 'Supplementary: 56 Laws of Software Engineering', link: '/notes/first-semester/programming-from-first-principles/Software-Engineering-56-Laws-Combined-Article' },
         firstSemester('Research Methodology', 'research-methodology', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]),
       ],
       '/notes/add-on-courses/': [

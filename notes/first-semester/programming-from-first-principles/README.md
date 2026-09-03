@@ -50,6 +50,7 @@ Finish the memory rules and self-check before reading the answers.
 - [Flowcharts](Flowcharts.md) - process-style revision.
 - [Summary](Summary.md) - short overview of the subject.
 - [Web Resources](Web-Resources.md) - trusted external references for deeper reading.
+- [Supplementary Article: The 56 Laws of Software Engineering](Software-Engineering-56-Laws-Combined-Article.md) - extra reading on software-engineering principles and decision-making.
 - [Internal Exam 1](Internal-Exam-1.md) - 23-question paper with 8 sections and answer key.
 - [Practice Test 1](Practice-Test-1.md) - revision test for Modules 1-7.
 - [Practice Test 2](Practice-Test-2.md) - revision test for Modules 8-14.
