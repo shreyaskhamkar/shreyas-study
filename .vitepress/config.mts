@@ -23,6 +23,7 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'First Semester', link: '/notes/first-semester/' },
       { text: 'Add-on Courses', link: '/notes/add-on-courses/' },
+      { text: 'Software Engineering', link: '/notes/software-engineering/' },
     ],
     sidebar: {
       '/notes/first-semester/': [
@@ -33,13 +34,16 @@ export default defineConfig({
         firstSemester('Persistent Data Management', 'persistent-data-management', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
         firstSemester('Processor Architecture and Design', 'Processor-Architecture-and-Design', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
         firstSemester('Programming from First Principles', 'programming-from-first-principles', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]),
-        { text: 'Supplementary: 56 Laws of Software Engineering', link: '/notes/first-semester/programming-from-first-principles/Software-Engineering-56-Laws-Combined-Article' },
         firstSemester('Research Methodology', 'research-methodology', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]),
       ],
       '/notes/add-on-courses/': [
         { text: 'Add-on Courses', link: '/notes/add-on-courses/' },
         { text: 'Human Rights', link: '/notes/add-on-courses/human-rights/README' },
         { text: 'Introduction to Constitution', link: '/notes/add-on-courses/introduction-to-constitution/README' },
+      ],
+      '/notes/software-engineering/': [
+        { text: 'Software Engineering Reading', link: '/notes/software-engineering/' },
+        { text: 'The 56 Laws of Software Engineering', link: '/notes/software-engineering/Software-Engineering-56-Laws-Combined-Article' },
       ],
     },
     search: { provider: 'local' },
