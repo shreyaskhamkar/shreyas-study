@@ -1,0 +1,296 @@
+# Module 4: Uncertain Knowledge and Reasoning
+
+[← Previous: Module 3](<Module-3.md>) · [Subject index](README.md) · [Next: Module 5 →](<Module-5.md>)
+
+## Learning outcomes
+
+After completing this module, you should be able to:
+
+- explain why intelligent systems must reason under uncertainty;
+- apply conditional probability and Bayes' rule;
+- test independence and conditional independence;
+- explain Bayesian networks and the Naive Bayes classifier; and
+- describe temporal reasoning with Hidden Markov Models.
+
+
+## Prerequisites
+
+Complete [Module 3](Module-3.md) first. Review its quick-revision section if any term below feels unfamiliar.
+
+## Study blocks
+
+Study one block at a time. Work through its example and checkpoint before continuing.
+
+| Block | Topic | Suggested time |
+|---|---|---|
+| 1 | Why uncertainty matters | 10-15 minutes |
+| 2 | Probability basics | 10-15 minutes |
+| 3 | Bayes' rule | 10-15 minutes |
+| 4 | Independence | 10-15 minutes |
+| 5 | Bayesian networks | 10-15 minutes |
+| 6 | Naive Bayes classifier | 10-15 minutes |
+| 7 | Time and uncertainty | 10-15 minutes |
+| 8 | Hidden Markov Models | 10-15 minutes |
+| 9 | Decision-making under uncertainty | 10-15 minutes |
+
+
+## Why uncertainty matters
+
+An agent rarely has complete and perfectly reliable information. Sensors may be
+noisy, causes may be hidden, actions may have uncertain effects, and the world
+may change. Probability provides a consistent language for representing degrees
+of belief.
+
+Uncertainty may arise from:
+
+- incomplete or missing observations;
+- measurement noise;
+- ambiguous language or evidence;
+- stochastic processes;
+- conflicting information; and
+- simplified models of a complex world.
+
+## Probability basics
+
+For an event `A`, `0 <= P(A) <= 1` and `P(not A) = 1 - P(A)`.
+
+```text
+P(A OR B) = P(A) + P(B) - P(A AND B)
+```
+
+If A and B are mutually exclusive, `P(A AND B) = 0`.
+
+### Conditional probability
+
+Conditional probability updates belief in A after learning B:
+
+```text
+P(A | B) = P(A AND B) / P(B), when P(B) > 0
+```
+
+The product rule follows:
+
+```text
+P(A AND B) = P(A | B) P(B)
+           = P(B | A) P(A)
+```
+
+## Bayes' rule
+
+Bayes' rule reverses a conditional probability:
+
+```text
+P(H | E) = P(E | H) P(H) / P(E)
+```
+
+- `P(H)` is the prior probability.
+- `P(E | H)` is the likelihood.
+- `P(H | E)` is the posterior probability.
+- `P(E)` is the evidence or normalizing constant.
+
+### Worked diagnostic example
+
+A condition affects 1% of people. A test is 90% sensitive and has a 5% false
+positive rate.
+
+```text
+P(D) = 0.01
+P(+ | D) = 0.90
+P(+ | not D) = 0.05
+
+P(+) = (0.90)(0.01) + (0.05)(0.99) = 0.0585
+P(D | +) = (0.90)(0.01) / 0.0585 = 0.1538
+```
+
+Despite a positive result, the posterior is about 15.4%. The low base rate is
+important; ignoring it produces the **base-rate fallacy**.
+
+## Independence
+
+A and B are independent if knowing one does not change belief in the other:
+
+```text
+P(A | B) = P(A)
+```
+
+Equivalently, `P(A AND B) = P(A)P(B)`.
+
+A and B are conditionally independent given C if:
+
+```text
+P(A, B | C) = P(A | C)P(B | C)
+```
+
+Variables may be dependent overall but conditionally independent once a common
+cause is known.
+
+## Bayesian networks
+
+A Bayesian network is a directed acyclic graph (DAG) in which:
+
+- nodes are random variables;
+- directed edges represent direct probabilistic dependencies; and
+- each node has a conditional probability table (CPT).
+
+For a network `Rain -> WetGrass <- Sprinkler`, the joint distribution factors as:
+
+```text
+P(Rain, Sprinkler, WetGrass)
+= P(Rain) P(Sprinkler) P(WetGrass | Rain, Sprinkler)
+```
+
+The graph compactly represents conditional independence and avoids storing a
+full joint table when the domain has sparse dependencies.
+
+## Naive Bayes classifier
+
+Naive Bayes assumes features are conditionally independent given class `C`:
+
+```text
+P(C | x1, ..., xn) is proportional to P(C) product(P(xi | C))
+```
+
+The predicted class maximizes this score.
+
+### Small classification example
+
+For spam classification with words `offer` and `win`:
+
+```text
+score(spam) = P(spam) P(offer | spam) P(win | spam)
+score(ham)  = P(ham)  P(offer | ham)  P(win | ham)
+```
+
+Choose the larger score after normalization if an actual posterior is needed.
+In implementations, log probabilities prevent numerical underflow. Laplace
+smoothing avoids multiplying by zero for unseen feature values.
+
+### Advantages and limitations
+
+- Fast to train and predict.
+- Works well for text and high-dimensional sparse data.
+- Needs relatively little training data.
+- Its independence assumption is often unrealistic.
+- Probability estimates may be poorly calibrated even when classification is good.
+
+## Time and uncertainty
+
+Temporal models reason about states that evolve. A useful model distinguishes:
+
+- **state variables:** hidden condition of the world;
+- **evidence variables:** observations generated by a state;
+- **transition model:** `P(X_t | X_(t-1))`; and
+- **sensor model:** `P(E_t | X_t)`.
+
+The first-order Markov assumption says the current state depends on the previous
+state rather than the complete history.
+
+## Hidden Markov Models
+
+An HMM contains:
+
+- a finite set of hidden states;
+- initial state probabilities;
+- transition probabilities between hidden states; and
+- emission probabilities for observations.
+
+Typical HMM tasks are:
+
+| Task | Question | Common algorithm |
+|---|---|---|
+| Filtering | What is the current state given evidence so far? | Forward algorithm |
+| Prediction | What will a future state be? | Repeated transition update |
+| Smoothing | What was a past state given later evidence? | Forward-backward |
+| Decoding | What is the most likely state sequence? | Viterbi algorithm |
+| Learning | What parameters best explain the data? | Baum-Welch |
+
+### Example
+
+Suppose weather (`Rainy`, `Sunny`) is hidden and umbrella observations are
+visible. Transition probabilities model how weather changes; emission
+probabilities model how likely an umbrella is under each weather state. The
+Viterbi algorithm finds the most likely weather sequence for an observed
+umbrella sequence.
+
+## Decision-making under uncertainty
+
+Probability describes what may happen; utility describes how desirable an
+outcome is. A rational decision maker chooses the action with maximum expected
+utility:
+
+```text
+EU(action) = sum P(outcome | action) * Utility(outcome)
+```
+
+The most probable outcome is not always the best decision because low-probability
+outcomes may have very high costs.
+
+## Common mistakes
+
+- Reversing `P(H | E)` and `P(E | H)`.
+- Ignoring the prior probability and committing the base-rate fallacy.
+- Assuming two variables are independent merely because they look unrelated.
+- Multiplying many small probabilities directly instead of using log probabilities.
+- Treating an HMM's observations as its hidden states.
+
+## Quick revision
+
+- Conditional probability updates belief after evidence is known.
+- Bayes' rule combines prior, likelihood, and evidence to produce a posterior.
+- A Bayesian network is a DAG plus conditional probability tables.
+- Naive Bayes assumes features are conditionally independent given the class.
+- An HMM combines hidden-state transitions with observation probabilities.
+- A rational decision maximizes expected utility, not merely probability.
+
+## Important exam questions
+
+1. Explain sources of uncertainty in AI.
+2. State and apply Bayes' rule to a diagnostic problem.
+3. Distinguish independence from conditional independence.
+4. Explain the structure and factorization of a Bayesian network.
+5. Derive the Naive Bayes decision rule and discuss its assumptions.
+6. Explain HMM components and the filtering, smoothing, and decoding tasks.
+
+## PDF-aligned additions
+
+### Time representation and temporal reasoning
+
+Time can be represented as a time point, time interval, duration, sequence, or
+temporal relation such as before, after, during, or overlaps. Temporal reasoning
+uses these representations in planning, scheduling, event monitoring, and
+prediction. Distinguish past evidence, present evidence, and future prediction.
+
+### Fuzzy logic versus probability
+
+Probability represents uncertainty about whether an event is true. Fuzzy logic
+represents the degree to which an object satisfies a vague concept. “There is a
+70% chance of rain” is probabilistic; “the temperature is 0.7 warm” is a fuzzy
+membership statement. They are not interchangeable.
+
+### Bayes and HMM problem-solving checklist
+
+For Bayes, define the hypothesis and evidence, identify prior/likelihood/evidence,
+then apply `P(H|E) = P(E|H)P(H)/P(E)` and check for a base-rate effect.
+
+For HMMs: filtering uses a forward update, prediction uses the transition model,
+smoothing uses forward-backward, and decoding uses Viterbi. These are different
+tasks even though they use the same transition and emission models.
+
+## Practice ladder
+
+1. **Easy - Recall:** Define the module's central idea in one or two sentences.
+2. **Easy - Recognize:** Identify the correct method for a small example and explain why it fits.
+3. **Medium - Apply:** Work through one representative problem without copying the example.
+4. **Medium - Compare:** Contrast two methods or concepts from the module.
+5. **Hard - Integrate:** Solve a university-style scenario and justify every major step.
+
+<details>
+<summary>Reveal self-evaluation guide</summary>
+
+A complete response uses correct terminology, shows intermediate steps, connects the result to the scenario, and states one assumption or limitation.
+
+</details>
+
+---
+
+[← Previous: Module 3](<Module-3.md>) · [Subject index](README.md) · [Next: Module 5 →](<Module-5.md>)
