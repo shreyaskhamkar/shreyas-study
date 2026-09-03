@@ -1,5 +1,12 @@
 # The 56 Laws of Software Engineering
 
+> **Source and attribution:** The Laws of Software Engineering were created by
+> **Dr. Milan Milanović**. Read the original collection at
+> [lawsofsoftwareengineering.com](https://lawsofsoftwareengineering.com/).
+>
+> This Markdown learning article was independently written and compiled by
+> **Shreyas Khamkar** as a study reference. It is not the original source.
+
 ## A practical guide for developers, backend engineers, architects, tech leads, and engineering managers
 
 > **Goal:** Understand the mental model behind each law, know when it is
