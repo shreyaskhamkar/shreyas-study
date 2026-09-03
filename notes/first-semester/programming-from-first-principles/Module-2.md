@@ -1,143 +1,148 @@
-# Module 2: Higher-Order Functions
+# Module 2: Standard Data Types
 
 [← Previous: Module 1](<Module-1.md>) · [Subject index](README.md) · [Next: Module 3 →](<Module-3.md>)
 
 ## Learning outcomes
 
-- explain what a higher-order function is in Python;
-- use `map`, `filter`, and `lambda` with confidence;
-- write a function that receives or returns another function;
-- trace a small function example step by step.
+- identify common Python data types;
+- choose a suitable collection for a small problem;
+- read simple Python syntax and examples;
+- explain the difference between built-in types and containers.
 
 ## Prerequisites
 
-Read [Module 1](Module-1.md) first. Make sure you are comfortable with Python values, lists, and function calls.
+Complete [Module 1](Module-1.md) first. Review its control-flow and expression examples if any term below feels unfamiliar.
 
 ## The idea in one sentence
 
-A higher-order function is a function that works with other functions as values.
+A data type tells Python what kind of value you are using and what operations are allowed.
 
 ## Everyday analogy
 
-Think of a teacher who does not give one fixed answer. Instead, the teacher gives a rule such as "double every number" or "keep only even numbers." You then apply that rule to a whole list.
+Think of a stationery box with separate slots for pens, pencils, erasers, and clips. Each item fits a different slot, and the slot tells you what belongs there.
 
 ## Syntax
 
 ```python
-def apply_twice(func, value):
-    return func(func(value))
-
-double = lambda x: x * 2
-```
-
-```python
-numbers = [1, 2, 3]
-squared = list(map(lambda x: x * x, numbers))
-even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
+x = 5
+name = "Asha"
+marks = [12, 18, 20]
+point = (3, 4)
+tags = {"python", "exam"}
+student = {"id": 1, "name": "Asha"}
 ```
 
 ## Worked example
 
 ```python
-def square(x):
-    return x * x
-
-result = list(map(square, [1, 2, 3]))
+count = 3
+ratio = 2.5
+passed = True
+letter = "A"
+numbers = [1, 2, 3]
 ```
 
-Step by step:
+Here:
 
-1. `map(square, [1, 2, 3])` sends each list item into `square`.
-2. `square(1)` gives `1`.
-3. `square(2)` gives `4`.
-4. `square(3)` gives `9`.
-5. `list(...)` collects the results into `[1, 4, 9]`.
+- `count` is an `int`
+- `ratio` is a `float`
+- `passed` is a `bool`
+- `letter` is a `str`
+- `numbers` is a `list`
 
 ## Why this matters in practice
 
-- In college notes, higher-order functions show how one idea can control many values.
-- In real code, they are useful in data cleaning, report generation, validation, and repeated transformations.
-- They help you write shorter code without repeating the same loop logic again and again.
+- In college notes, types help you classify values clearly.
+- In real code, types help you choose the right storage form for marks, names, statuses, and grouped data.
+- They reduce confusion when a value should behave like a number, text, or collection.
 
 ## Important concepts
 
-### Higher-order function
+### `int`
 
-A higher-order function can:
-
-- take a function as input;
-- return a function as output;
-- or do both.
-
-Examples:
+Whole numbers.
 
 ```python
-def apply(func, value):
-    return func(value)
+age = 21
 ```
 
+### `float`
+
+Numbers with decimal points.
+
 ```python
-def make_multiplier(n):
-    return lambda x: x * n
+price = 99.50
 ```
 
-### `map`
+### `bool`
 
-`map` applies a function to every item in an iterable.
+True/False values.
 
 ```python
-list(map(str, [1, 2, 3]))
+is_passed = True
 ```
 
-Result:
+### `str`
+
+Text.
 
 ```python
-['1', '2', '3']
+name = "Asha"
 ```
 
-### `filter`
+### `list`
 
-`filter` keeps only the items that pass a test.
+An ordered, changeable collection.
 
 ```python
-list(filter(lambda x: x > 2, [1, 2, 3, 4]))
+marks = [45, 52, 61]
 ```
 
-Result:
+### `tuple`
+
+An ordered, fixed collection.
 
 ```python
-[3, 4]
+point = (3, 4)
 ```
 
-### `lambda`
+### `set`
 
-`lambda` creates a short anonymous function when a full `def` feels too heavy.
+A collection with unique values only.
 
 ```python
-lambda x: x + 1
+tags = {"python", "exam"}
+```
+
+### `dict`
+
+A key-value mapping.
+
+```python
+student = {"id": 1, "name": "Asha"}
 ```
 
 ## Technical meaning
 
-Python treats functions as first-class values. That means functions can be stored in variables, passed into other functions, and returned from other functions. A higher-order function uses that property to make programs more reusable and expressive.
+In Python, every value has a type. The type controls behavior such as addition, indexing, membership checks, and method availability. Collections group related values and describe how those values are organized.
 
 ## Memory rule
 
-- `map` transforms
-- `filter` selects
-- `lambda` writes a small function quickly
-- higher-order means "function with function power"
+- list = ordered and changeable
+- tuple = ordered and fixed
+- set = unique items only
+- dict = key to value mapping
 
 ## Quick check
 
-- Why is `map` higher-order?
-- What does `lambda x: x + 1` do?
-- What does `list(filter(...))` return?
-- Why is `make_multiplier` a higher-order function?
+- What type is `"A"`?
+- Which type is best for unique tags?
+- Which type is best for named fields?
+- Why would you use a tuple instead of a list?
 
 ## Short exam answer
 
-A higher-order function is a function that takes another function as input or returns one as output. In Python, `map`, `filter`, and functions that return closures are common examples. They reduce repetition and make code easier to reuse.
+Python data types classify values such as numbers, text, and collections. `int`, `float`, `bool`, and `str` are basic built-in types, while `list`, `tuple`, `set`, and `dict` are common collection types. Choosing the right type helps programs stay clear and correct.
 
 ---
 

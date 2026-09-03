@@ -1,126 +1,110 @@
-# Module 3: Standard Constructs
+# Module 3: Calculus
 
 [← Previous: Module 2](<Module-2.md>) · [Subject index](README.md) · [Next: Module 4 →](<Module-4.md>)
 
 ## Learning outcomes
 
-- use Python control flow correctly;
-- write simple loops and comprehensions;
-- recognize the syntax of common program blocks;
-- explain how Python groups and repeats statements.
+- read simple lambda expressions;
+- explain the idea behind lambda calculus;
+- trace a tiny function call step by step;
+- connect formal notation to Python function syntax.
 
 ## Prerequisites
 
-Read [Module 2](Module-2.md) first. Be comfortable with function calls and list processing.
+Complete [Module 2](Module-2.md) first. You should already be comfortable with values, collections, and expressions.
 
 ## The idea in one sentence
 
-Standard constructs are the everyday building blocks that let Python make decisions, repeat work, and build new values.
+Lambda calculus is a small formal system for describing functions, while Python `lambda` gives a short way to write one-line anonymous functions.
 
 ## Everyday analogy
 
-Think of a restaurant order system. It checks a condition, chooses one branch, repeats actions for every item, and sometimes builds a final list of items to serve.
+Think of a shortcut note scribbled on a sticky paper. It is not the full document, but it still tells you exactly what to do.
 
 ## Syntax
 
 ```python
-if score >= 75:
-    grade = "Distinction"
-elif score >= 40:
-    grade = "Pass"
-else:
-    grade = "Fail"
+double = lambda x: x + 1
 ```
 
-```python
-squares = [x * x for x in range(1, 6) if x % 2 == 0]
+```text
+(\x. x + 1) 5 -> 5 + 1 -> 6
 ```
 
 ## Worked example
 
 ```python
-total = 0
-for n in [1, 2, 3]:
-    total += n
+add_one = lambda n: n + 1
+value = add_one(5)
 ```
 
 Step by step:
 
-1. Start with `total = 0`.
-2. Take `n = 1`, add it to `total`.
-3. Take `n = 2`, add it to `total`.
-4. Take `n = 3`, add it to `total`.
-5. Final result is `6`.
+1. `add_one` stores a function.
+2. The function takes one input `n`.
+3. The call `add_one(5)` substitutes `n = 5`.
+4. The result is `6`.
 
 ## Why this matters in practice
 
-- In college notes, these constructs show how code is structured.
-- In real code, they are used for menus, validation, filtering, summarizing, and repeated processing.
-- They are the basic grammar of almost every Python program.
+- In college notes, lambda notation helps explain how functions work formally.
+- In real code, `lambda` is useful for small helper logic in sorting, mapping, and filtering.
+- It keeps short function logic in one place when a full `def` is unnecessary.
 
 ## Important concepts
 
-### `if/elif/else`
+### `lambda`
 
-Use this when code must choose one path from several options.
+`lambda` creates a small anonymous function.
 
 ```python
-if mark >= 75:
-    result = "High"
-elif mark >= 40:
-    result = "Medium"
-else:
-    result = "Low"
+lambda x: x * 2
 ```
 
-### `for`
+### Lambda calculus
 
-Use this when you want to go through items one by one.
+Lambda calculus uses only a few ideas:
 
-```python
-for item in [1, 2, 3]:
-    print(item)
+- variables
+- abstraction
+- application
+
+### Abstraction
+
+Abstraction means creating a function.
+
+```text
+\x. x + 1
 ```
 
-### `while`
+### Application
 
-Use this when the loop should continue until a condition changes.
+Application means using the function with an argument.
 
-```python
-count = 3
-while count > 0:
-    count -= 1
-```
-
-### Comprehension
-
-Use this to create a new collection from existing data.
-
-```python
-[x * x for x in range(5)]
+```text
+(\x. x + 1) 5
 ```
 
 ## Technical meaning
 
-Standard constructs control the flow of execution. They determine how statements are grouped, how conditions are tested, and how repetition is expressed in a Python program.
+Lambda calculus is a formal model of computation. It explains function creation, substitution, scope, and reduction. Python `lambda` is inspired by the same function-centered thinking, even though Python has a much richer syntax.
 
 ## Memory rule
 
-- condition -> `if`
-- repeated items -> `for`
-- repeated test -> `while`
-- new list from old data -> comprehension
+- abstraction = make a function
+- application = call the function
+- reduction = simplify the result
 
 ## Quick check
 
-- Why is indentation important in Python?
-- What does a list comprehension create?
-- When should you use `while` instead of `for`?
-- What does `elif` mean?
+- What is the Python form of an anonymous function?
+- What does `(\x. x + 1) 5` reduce to?
+- Why is lambda calculus important?
+- When should you avoid `lambda`?
 
 ## Short exam answer
 
-Standard constructs are the basic control features of Python. `if/elif/else` selects between choices, `for` and `while` repeat work, and comprehensions build new collections in a compact form. They are the core tools for program flow.
+Lambda calculus is a formal system for describing functions and computation using variables, abstraction, and application. In Python, `lambda` is a short syntax for anonymous functions, and it is often used in small helper expressions such as `map` or `sorted(key=...)`.
 
 ---
 

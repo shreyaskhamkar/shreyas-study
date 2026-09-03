@@ -1,104 +1,115 @@
-# Module 10: Concrete Types
+# Module 10: User-Defined Types
 
 [← Previous: Module 9](<Module-9.md>) · [Subject index](README.md) · [Next: Module 11 →](<Module-11.md>)
 
 ## Learning outcomes
 
-- identify concrete Python types;
-- separate specific types from generic placeholders;
-- explain why a concrete type is fully known;
-- recognize concrete vs generic examples.
+- create custom Python types;
+- use `class`, `@dataclass`, and `Enum`;
+- explain why custom types improve clarity;
+- read simple object-based code.
 
 ## Prerequisites
 
-Read [Module 9](Module-9.md) first. You should understand classes, dataclasses, and enums.
+Complete [Module 9](Module-9.md) first. You should understand inferred types and generic placeholders.
 
 ## The idea in one sentence
 
-A concrete type is a fully known type such as `int`, `bool`, `str`, or `Student`.
+User-defined types let you create new kinds of values that fit your own problem domain.
 
 ## Everyday analogy
 
-Think of a labeled box with one exact purpose. A box marked "pens" is specific, while a box marked "any stationery" is still open-ended.
+Think of a school database. It does not just store random text. It stores students, classes, subjects, and attendance records, each with a clear shape.
 
 ## Syntax
 
 ```python
-age: int = 20
-passed: bool = True
-name: str = "Asha"
+from dataclasses import dataclass
+from enum import Enum
+
+@dataclass
+class Student:
+    roll_no: int
+    name: str
+
+class TrafficLight(Enum):
+    RED = 1
+    YELLOW = 2
+    GREEN = 3
 ```
 
 ## Worked example
 
 ```python
-from typing import TypeVar
-
-T = TypeVar("T")
-
-def first(items: list[T]) -> T:
-    return items[0]
+student = Student(1, "Asha")
+light = TrafficLight.RED
 ```
 
 Step by step:
 
-1. `int`, `bool`, and `str` are concrete.
-2. `T` is a placeholder, not concrete.
-3. `list[T]` is still generic because the element type is not fixed.
-4. `list[int]` is concrete because the element type is known.
+1. `Student(1, "Asha")` creates one student object.
+2. `TrafficLight.RED` picks a fixed choice from the enum.
+3. The data now has structure instead of being plain unrelated values.
 
 ## Why this matters in practice
 
-- In college notes, concrete types help you separate general ideas from exact ones.
-- In real code, concrete types make APIs and data models easier to understand.
-- They are useful when a function must work with a specific kind of value.
+- In college notes, custom types show how programs model real things clearly.
+- In real code, they make forms, records, states, and business rules easier to manage.
+- They reduce mistakes because related data is grouped together.
 
 ## Important concepts
 
-### Concrete type
+### `class`
 
-A concrete type has no unresolved type variable.
+A class defines a custom type.
 
 ```python
-count: int = 5
+class Book:
+    def __init__(self, title):
+        self.title = title
 ```
 
-### Generic type
+### `@dataclass`
 
-A generic type still has a placeholder.
+A dataclass is a convenient way to define a data-holding class.
 
 ```python
-items: list[T]
+@dataclass
+class Point:
+    x: int
+    y: int
 ```
 
-### Fully known type
+### `Enum`
 
-The type is exact and no part of it is left open.
+An enum is a fixed set of named values.
 
 ```python
-numbers: list[int]
+class Day(Enum):
+    MON = 1
+    TUE = 2
 ```
 
 ## Technical meaning
 
-A concrete type is one exact type rather than a family of possible types. It has a fixed interpretation in the program and does not depend on later substitution of a placeholder.
+User-defined types let a program model the real world or a problem domain directly. That makes code easier to read, test, and change because the data structure reflects the meaning of the data.
 
 ## Memory rule
 
-- concrete = exact type
-- generic = type still open
-- `T` = placeholder
+- class = custom type
+- dataclass = simple record-like type
+- Enum = fixed named options
 
 ## Quick check
 
-- Is `int` concrete?
-- Is `T` concrete?
-- Why is `list[int]` more specific than `list[T]`?
-- Why do concrete types matter in APIs?
+- Why use a dataclass instead of a plain dict?
+- When is an Enum better than a string?
+- What does a class let you model?
+- How does a custom type improve readability?
 
 ## Short exam answer
 
-A concrete type is a fully known type with no unresolved type variables. Examples include `int`, `bool`, `str`, and specific classes like `Student`. Concrete types are useful because they clearly define what kind of value a program is working with.
+User-defined types let programmers create their own data models using classes, dataclasses, and enums. They are useful because they group related values, make code easier to read, and help represent real-world concepts more clearly.
 
 ---
 

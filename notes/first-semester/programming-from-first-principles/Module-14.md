@@ -1,106 +1,110 @@
-# Module 14: Polymorphism
+# Module 14: Type Classes
 
 [← Previous: Module 13](<Module-13.md>) · [Subject index](README.md) · [MCQ practice →](MCQ.md)
 
 ## Learning outcomes
 
-- explain how one function can work with many types;
-- read a generic Python example;
-- distinguish parametric and behavior-based polymorphism;
-- connect polymorphism with reusable code.
+- distinguish values, types, and classes;
+- use `type()` and `isinstance()` to inspect values;
+- explain why Python classes are themselves objects of the `type` class;
+- connect type classes with shared behavior and reusable code.
 
 ## Prerequisites
 
-Read [Module 13](Module-13.md) first. You should understand protocols and shared behavior.
+Complete [Module 13](Module-13.md) first. You should be comfortable with step-by-step reasoning about code behavior.
 
 ## The idea in one sentence
 
-Polymorphism means one piece of code can work in many forms without changing its core logic.
+Type classes describe shared operations that different types can support. In the Python source material, this module focuses on the relationship between values, types, and classes, then connects that object model to interfaces and shared behavior.
 
 ## Everyday analogy
 
-Think of a universal remote. The same button press can control a TV, fan, or AC because each device understands the same idea in its own way.
+Think of a library. A book is a value, its category is like a type, and the cataloging system is like a class that describes how such values are organized and used.
 
 ## Syntax
 
 ```python
-from typing import TypeVar
+value = 42
 
-T = TypeVar("T")
-
-def first(items: list[T]) -> T:
-    return items[0]
+print(type(value))
+print(type(int))
+print(isinstance(value, int))
 ```
 
 ## Worked example
 
 ```python
-first([10, 20, 30])
-first(["a", "b", "c"])
+class Student:
+    pass
+
+student = Student()
+
+print(type(student) is Student)
+print(type(Student) is type)
+print(isinstance(student, Student))
 ```
 
 Step by step:
 
-1. The same function is used for numbers.
-2. The same function is used for text.
-3. The function logic does not change.
-4. Only the type of input changes.
+1. `student` is a value, specifically an instance of `Student`.
+2. `type(student)` returns the class that created the value.
+3. `Student` is itself an object whose type is `type`.
+4. `isinstance()` checks whether a value belongs to a type or class.
 
 ## Why this matters in practice
 
-- In college notes, polymorphism shows how generic code stays reusable.
-- In real code, it helps with helper functions, containers, and behavior-based APIs.
-- It reduces duplication because one design can serve many types.
+- In college notes, this module clarifies the Python object model.
+- In real code, it helps you inspect, validate, and safely process values.
+- Shared operations can then be expressed through protocols, ABCs, or other interface patterns.
 
 ## Important concepts
 
-### Parametric polymorphism
+### Values, types, and classes
 
-Parametric polymorphism uses a type variable such as `T`.
-
-```python
-def echo(value: T) -> T:
-    return value
-```
-
-### Behavior-based polymorphism
-
-Different types can support the same operation.
+Every runtime value has a type. Classes define instances, and classes themselves are objects created by the `type` class.
 
 ```python
-len("abc")
-len([1, 2, 3])
+number = 10
+print(type(number))       # <class 'int'>
+print(type(int))          # <class 'type'>
+print(isinstance(number, int))
 ```
 
-### Generic function
+### Shared behavior
 
-A generic function works with more than one type.
+Type classes are a general way to describe operations shared by multiple types. Python commonly expresses this idea with duck typing, `Protocol`, or an abstract base class.
 
 ```python
-def first(items: list[T]) -> T:
-    return items[0]
+class HasArea(Protocol):
+    def area(self) -> float:
+        ...
 ```
+
+### Protocol and ABC
+
+An abstract base class or protocol can make the expected shared behavior explicit for readers and static-analysis tools.
 
 ## Technical meaning
 
-Polymorphism means many forms. In Python, it appears when one function or method works across different types without changing its core logic. This can happen through type variables, shared methods, or operations defined by behavior.
+The Python object model relates values to types and types to classes. Type classes provide the broader idea of describing shared operations, while Python implements practical versions through duck typing, `Protocol`, and `ABC`.
 
 ## Memory rule
 
-- parametric = type variable
-- behavior-based = shared operations
-- generic = works for more than one type
+- value = runtime data
+- type = classification of a value
+- class = object definition and a runtime object
+- `isinstance()` = membership check against a type or class
 
 ## Quick check
 
-- Why is `first` polymorphic?
-- What type does `T` represent?
-- How does Python support many forms of behavior?
-- Why is polymorphism useful in reusable code?
+- What is the difference between a value, a type, and a class?
+- What does `type(value)` return?
+- Why is `type(int)` itself `type`?
+- How do protocols and ABCs express shared behavior?
 
 ## Short exam answer
 
-Polymorphism means one piece of code can work with many types. In Python, it appears in generic functions that use type variables and in behavior-based code where different objects provide the same operations. It makes programs more reusable and flexible.
+Type classes describe shared operations across different types. In Python, values have types, classes define values, and classes are themselves objects of `type`; `Protocol`, duck typing, and `ABC` provide practical forms of shared behavior.
 
 ---
 

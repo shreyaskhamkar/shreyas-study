@@ -1,148 +1,126 @@
-# Module 1: Data Types and Collections
+# Module 1: Standard Constructs
 
 [↑ Semester I](../README.md) · [Subject index](README.md) · [Next: Module 2 →](<Module-2.md>)
 
 ## Learning outcomes
 
-- identify common Python data types;
-- choose a suitable collection for a small problem;
-- read simple Python syntax and examples;
-- explain the difference between built-in types and containers.
+- use Python control flow correctly;
+- write simple loops and comprehensions;
+- recognize the syntax of common program blocks;
+- explain how Python groups and repeats statements.
 
 ## Prerequisites
 
-None. This is the starting module for the Python track.
+No earlier module is required. Start with the standard constructs and review each unfamiliar term before continuing.
 
 ## The idea in one sentence
 
-A data type tells Python what kind of value you are using and what operations are allowed.
+Standard constructs are the everyday building blocks that let Python make decisions, repeat work, and build new values.
 
 ## Everyday analogy
 
-Think of a stationery box with separate slots for pens, pencils, erasers, and clips. Each item fits a different slot, and the slot tells you what belongs there.
+Think of a restaurant order system. It checks a condition, chooses one branch, repeats actions for every item, and sometimes builds a final list of items to serve.
 
 ## Syntax
 
 ```python
-x = 5
-name = "Asha"
-marks = [12, 18, 20]
-point = (3, 4)
-tags = {"python", "exam"}
-student = {"id": 1, "name": "Asha"}
+if score >= 75:
+    grade = "Distinction"
+elif score >= 40:
+    grade = "Pass"
+else:
+    grade = "Fail"
+```
+
+```python
+squares = [x * x for x in range(1, 6) if x % 2 == 0]
 ```
 
 ## Worked example
 
 ```python
-count = 3
-ratio = 2.5
-passed = True
-letter = "A"
-numbers = [1, 2, 3]
+total = 0
+for n in [1, 2, 3]:
+    total += n
 ```
 
-Here:
+Step by step:
 
-- `count` is an `int`
-- `ratio` is a `float`
-- `passed` is a `bool`
-- `letter` is a `str`
-- `numbers` is a `list`
+1. Start with `total = 0`.
+2. Take `n = 1`, add it to `total`.
+3. Take `n = 2`, add it to `total`.
+4. Take `n = 3`, add it to `total`.
+5. Final result is `6`.
 
 ## Why this matters in practice
 
-- In college notes, types help you classify values clearly.
-- In real code, types help you choose the right storage form for marks, names, statuses, and grouped data.
-- They reduce confusion when a value should behave like a number, text, or collection.
+- In college notes, these constructs show how code is structured.
+- In real code, they are used for menus, validation, filtering, summarizing, and repeated processing.
+- They are the basic grammar of almost every Python program.
 
 ## Important concepts
 
-### `int`
+### `if/elif/else`
 
-Whole numbers.
+Use this when code must choose one path from several options.
 
 ```python
-age = 21
+if mark >= 75:
+    result = "High"
+elif mark >= 40:
+    result = "Medium"
+else:
+    result = "Low"
 ```
 
-### `float`
+### `for`
 
-Numbers with decimal points.
+Use this when you want to go through items one by one.
 
 ```python
-price = 99.50
+for item in [1, 2, 3]:
+    print(item)
 ```
 
-### `bool`
+### `while`
 
-True/False values.
+Use this when the loop should continue until a condition changes.
 
 ```python
-is_passed = True
+count = 3
+while count > 0:
+    count -= 1
 ```
 
-### `str`
+### Comprehension
 
-Text.
-
-```python
-name = "Asha"
-```
-
-### `list`
-
-An ordered, changeable collection.
+Use this to create a new collection from existing data.
 
 ```python
-marks = [45, 52, 61]
-```
-
-### `tuple`
-
-An ordered, fixed collection.
-
-```python
-point = (3, 4)
-```
-
-### `set`
-
-A collection with unique values only.
-
-```python
-tags = {"python", "exam"}
-```
-
-### `dict`
-
-A key-value mapping.
-
-```python
-student = {"id": 1, "name": "Asha"}
+[x * x for x in range(5)]
 ```
 
 ## Technical meaning
 
-In Python, every value has a type. The type controls behavior such as addition, indexing, membership checks, and method availability. Collections group related values and describe how those values are organized.
+Standard constructs control the flow of execution. They determine how statements are grouped, how conditions are tested, and how repetition is expressed in a Python program.
 
 ## Memory rule
 
-- list = ordered and changeable
-- tuple = ordered and fixed
-- set = unique items only
-- dict = key to value mapping
+- condition -> `if`
+- repeated items -> `for`
+- repeated test -> `while`
+- new list from old data -> comprehension
 
 ## Quick check
 
-- What type is `"A"`?
-- Which type is best for unique tags?
-- Which type is best for named fields?
-- Why would you use a tuple instead of a list?
+- Why is indentation important in Python?
+- What does a list comprehension create?
+- When should you use `while` instead of `for`?
+- What does `elif` mean?
 
 ## Short exam answer
 
-Python data types classify values such as numbers, text, and collections. `int`, `float`, `bool`, and `str` are basic built-in types, while `list`, `tuple`, `set`, and `dict` are common collection types. Choosing the right type helps programs stay clear and correct.
+Standard constructs are the basic control features of Python. `if/elif/else` selects between choices, `for` and `while` repeat work, and comprehensions build new collections in a compact form. They are the core tools for program flow.
 
 ---
 

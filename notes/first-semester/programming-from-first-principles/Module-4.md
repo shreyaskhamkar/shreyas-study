@@ -1,112 +1,105 @@
-# Module 4: Iteration and Lazy Evaluation
+# Module 4: First-Class-ness
 
 [← Previous: Module 3](<Module-3.md>) · [Subject index](README.md) · [Next: Module 5 →](<Module-5.md>)
 
 ## Learning outcomes
 
-- explain eager and lazy behavior in Python;
-- write and read a generator;
-- use `yield` to produce values on demand;
-- connect iteration with memory-friendly code.
+- treat functions like ordinary values;
+- write a function that returns another function;
+- explain what a closure is;
+- use function values in simple examples.
 
 ## Prerequisites
 
-Read [Module 3](Module-3.md) first. Make sure you are comfortable with loops and comprehensions.
+Complete [Module 3](Module-3.md) first. You should be comfortable with functions as values and simple function notation.
 
 ## The idea in one sentence
 
-Iteration lets Python move through values repeatedly, while lazy behavior delays work until a value is actually needed.
+First-class functions are functions that Python treats like ordinary values.
 
 ## Everyday analogy
 
-Think of a water tap. You do not fill every bucket in advance. You open the tap and take water only when needed. A generator behaves in a similar on-demand way.
+Think of a recipe card. You can store it in a drawer, hand it to someone, or reuse it later. A function in Python can be handled the same way.
 
 ## Syntax
 
 ```python
-def count_up_to(n):
-    i = 1
-    while i <= n:
-        yield i
-        i += 1
+def make_adder(n):
+    def add(x):
+        return x + n
+    return add
 ```
 
 ## Worked example
 
 ```python
-nums = count_up_to(3)
-first = next(nums)
-second = next(nums)
+add_five = make_adder(5)
+result = add_five(10)
 ```
 
 Step by step:
 
-1. `count_up_to(3)` creates a generator.
-2. `next(nums)` gives `1`.
-3. The generator pauses.
-4. The next `next(nums)` gives `2`.
-5. Another call gives `3`.
+1. `make_adder(5)` creates a new function.
+2. That function remembers `n = 5`.
+3. `add_five(10)` uses the remembered value.
+4. The result is `15`.
 
 ## Why this matters in practice
 
-- In college notes, generators show how Python can delay work.
-- In real code, they are useful for large files, streams, and data pipelines.
-- They help save memory because values are produced one at a time.
+- In college notes, it explains why functions can be passed around like data.
+- In real code, it supports callbacks, decorators, pipelines, and factory functions.
+- It makes programs more reusable and easier to organize.
 
 ## Important concepts
 
-### Eager evaluation
+### First-class function
 
-Python usually computes values right away.
+A function is first-class if you can:
 
-```python
-result = 2 + 3
-```
+- store it in a variable
+- pass it as an argument
+- return it from another function
 
-### Lazy behavior
+### Closure
 
-Lazy behavior waits until the value is needed.
-
-```python
-def numbers():
-    yield 1
-    yield 2
-```
-
-### Generator
-
-A generator is an iterator that produces values one by one.
+A closure is a function that remembers values from the environment where it was created.
 
 ```python
-def gen():
-    yield "A"
-    yield "B"
+def outer(n):
+    def inner(x):
+        return x + n
+    return inner
 ```
 
-### `yield`
+### Function factory
 
-`yield` returns a value and pauses the function so it can continue later.
+A function factory is a function that creates and returns another function.
+
+```python
+def power(exp):
+    return lambda x: x ** exp
+```
 
 ## Technical meaning
 
-Lazy evaluation means computation is delayed until the result is required. Python is not fully lazy, but generators and iterators give a lazy-style way to handle sequences efficiently.
+Python functions are first-class objects. That means they have identity, can be assigned to variables, and can carry along remembered state through closures. This supports higher-order programming patterns.
 
 ## Memory rule
 
-- eager = compute now
-- lazy = compute when needed
-- `yield` = hand out one value and pause
+- store a function in a variable
+- pass a function as an argument
+- return a function from another function
 
 ## Quick check
 
-- Why does `next()` work on a generator?
-- What does `yield` do?
-- Why are generators useful for large data?
-- How is a generator different from a list?
+- Why is `make_adder` useful?
+- What value does `add_five` remember?
+- What is a closure?
+- How is a function factory different from an ordinary function?
 
 ## Short exam answer
 
-Python is usually eager, but generators provide lazy-style evaluation. A generator uses `yield` to produce values one at a time, which helps save memory and makes it easier to work with large or endless sequences.
+First-class functions are functions that Python can store, pass, and return like any other value. A closure is a function that remembers values from the surrounding scope. This makes function-based design more flexible and reusable.
 
 ---
 

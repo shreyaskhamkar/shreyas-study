@@ -1,107 +1,102 @@
-# Module 13: Protocols and Shared Behavior
+# Module 13: Operational Semantics
 
 [← Previous: Module 12](<Module-12.md>) · [Subject index](README.md) · [Next: Module 14 →](<Module-14.md>)
 
 ## Learning outcomes
 
-- describe shared behavior in Python;
-- use `Protocol` or `ABC` to state an interface;
-- understand duck typing;
-- explain why shared behavior is useful.
+- describe execution as step-by-step evaluation;
+- trace a simple Python expression;
+- explain why order of evaluation matters;
+- connect evaluation rules to program behavior.
 
 ## Prerequisites
 
-Read [Module 12](Module-12.md) first. You should be comfortable with step-by-step reasoning about code behavior.
+Complete [Module 12](Module-12.md) first. You should understand recursion and step-by-step reasoning.
 
 ## The idea in one sentence
 
-Protocols and shared behavior let one piece of code work with many types as long as they support the same operations.
+Operational semantics explains how a program runs by describing what happens at each evaluation step.
 
 ## Everyday analogy
 
-Think of different kinds of vehicles. A car and a bus are different, but both can move forward and stop. The behavior matters more than the label.
+Think of following a cooking recipe. Each step changes the state of the dish until the final meal is ready.
 
 ## Syntax
 
 ```python
-from typing import Protocol
-
-class HasArea(Protocol):
-    def area(self) -> float:
-        ...
-
-def print_area(shape: HasArea) -> None:
-    print(shape.area())
+result = (2 + 3) * 4
 ```
 
 ## Worked example
 
-```python
-class Circle:
-    def __init__(self, radius):
-        self.radius = radius
-
-    def area(self):
-        return 3.14 * self.radius * self.radius
+```text
+(2 + 3) * 4 -> 5 * 4 -> 20
 ```
 
 Step by step:
 
-1. `Circle` has an `area()` method.
-2. `print_area` only needs something that supports `area()`.
-3. The exact class name matters less than the behavior.
+1. Compute the inner addition first.
+2. Replace `(2 + 3)` with `5`.
+3. Multiply `5 * 4`.
+4. Final result is `20`.
 
 ## Why this matters in practice
 
-- In college notes, this module shows how Python handles shared behavior.
-- In real code, it helps you write functions that accept many object types.
-- It makes code flexible without forcing everything into one inheritance tree.
+- In college notes, operational semantics shows how to reason about execution.
+- In real code, it helps you understand why order, side effects, and function calls matter.
+- It is useful when debugging and when studying how interpreters work.
 
 ## Important concepts
 
-### Duck typing
+### Syntax
 
-If an object behaves correctly, it fits.
-
-```python
-def show_area(shape):
-    print(shape.area())
-```
-
-### Protocol
-
-A protocol describes the operations an object must support.
+Syntax is how code is written.
 
 ```python
-class HasArea(Protocol):
-    def area(self) -> float:
-        ...
+value = 10
 ```
 
-### ABC
+### Semantics
 
-An abstract base class is a class meant to define shared behavior for subclasses.
+Semantics is what the code means when it runs.
+
+### Reduction
+
+Reduction is one evaluation step.
+
+```text
+2 + 3 -> 5
+```
+
+### Stack frame
+
+A function call creates a new stack frame.
+
+```python
+def add(x, y):
+    return x + y
+```
 
 ## Technical meaning
 
-Shared behavior is a way to write code that works with many types as long as they support the same operations. Python often uses duck typing, while `Protocol` and `ABC` let you describe that behavior more explicitly for tools and readers.
+Operational semantics is a formal description of computation. It explains how expressions are transformed into simpler expressions until a final result is reached. This gives a precise model of program execution.
 
 ## Memory rule
 
-- protocol = behavior contract
-- duck typing = behavior matters more than type name
-- ABC = abstract base class
+- syntax = form
+- semantics = behavior
+- reduction = step-by-step evaluation
 
 ## Quick check
 
-- What does `HasArea` describe?
-- Why is duck typing useful?
-- How is a protocol different from a plain class?
-- When would you use an ABC?
+- What is the result of `(2 + 3) * 4`?
+- Why does evaluation order matter?
+- What does a function call create?
+- Why is operational semantics useful in debugging?
 
 ## Short exam answer
 
-Protocols and shared behavior let Python code work with many different types as long as those types provide the same methods. Duck typing uses behavior directly, while `Protocol` and `ABC` make the expected behavior more explicit.
+Operational semantics describes how a program executes by showing each evaluation step. It explains the meaning of code through reduction, evaluation order, and function-call behavior. This helps programmers reason about how expressions become final results.
 
 ---
 

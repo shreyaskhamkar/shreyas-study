@@ -1,109 +1,104 @@
-# Module 11: Recursion
+# Module 11: Concrete Types
 
 [← Previous: Module 10](<Module-10.md>) · [Subject index](README.md) · [Next: Module 12 →](<Module-12.md>)
 
 ## Learning outcomes
 
-- write a recursive Python function;
-- explain base case and recursive case;
-- trace a recursion step by step;
-- decide when recursion is a good fit.
+- identify concrete Python types;
+- separate specific types from generic placeholders;
+- explain why a concrete type is fully known;
+- recognize concrete vs generic examples.
 
 ## Prerequisites
 
-Read [Module 10](Module-10.md) first. You should understand concrete and generic types.
+Complete [Module 10](Module-10.md) first. You should understand classes, dataclasses, and enums.
 
 ## The idea in one sentence
 
-Recursion solves a problem by calling the same function on a smaller version of the problem.
+A concrete type is a fully known type such as `int`, `bool`, `str`, or `Student`.
 
 ## Everyday analogy
 
-Think of a set of nested boxes. To find the smallest item, you open one box, then the smaller box inside it, then the smaller one inside that.
+Think of a labeled box with one exact purpose. A box marked "pens" is specific, while a box marked "any stationery" is still open-ended.
 
 ## Syntax
 
 ```python
-def factorial(n):
-    if n == 0:
-        return 1
-    return n * factorial(n - 1)
+age: int = 20
+passed: bool = True
+name: str = "Asha"
 ```
 
 ## Worked example
 
 ```python
-factorial(3)
-# 3 * factorial(2)
-# 3 * 2 * factorial(1)
-# 3 * 2 * 1 * factorial(0)
-# 6
+from typing import TypeVar
+
+T = TypeVar("T")
+
+def first(items: list[T]) -> T:
+    return items[0]
 ```
 
 Step by step:
 
-1. `factorial(3)` needs `3 * factorial(2)`.
-2. `factorial(2)` needs `2 * factorial(1)`.
-3. `factorial(1)` needs `1 * factorial(0)`.
-4. `factorial(0)` returns `1`.
-5. The results combine back to `6`.
+1. `int`, `bool`, and `str` are concrete.
+2. `T` is a placeholder, not concrete.
+3. `list[T]` is still generic because the element type is not fixed.
+4. `list[int]` is concrete because the element type is known.
 
 ## Why this matters in practice
 
-- In college notes, recursion shows how one problem can be broken into smaller ones.
-- In real code, it is common in trees, folder traversal, and divide-and-conquer algorithms.
-- It gives a clean way to describe nested or self-similar data.
+- In college notes, concrete types help you separate general ideas from exact ones.
+- In real code, concrete types make APIs and data models easier to understand.
+- They are useful when a function must work with a specific kind of value.
 
 ## Important concepts
 
-### Base case
+### Concrete type
 
-The base case stops the recursion.
+A concrete type has no unresolved type variable.
 
 ```python
-if n == 0:
-    return 1
+count: int = 5
 ```
 
-### Recursive case
+### Generic type
 
-The recursive case makes the problem smaller.
+A generic type still has a placeholder.
 
 ```python
-return n * factorial(n - 1)
+items: list[T]
 ```
 
-### Structural recursion
+### Fully known type
 
-Structural recursion follows the shape of the data, such as a list.
+The type is exact and no part of it is left open.
 
 ```python
-def total(items):
-    if not items:
-        return 0
-    return items[0] + total(items[1:])
+numbers: list[int]
 ```
 
 ## Technical meaning
 
-Recursion is a way to define a computation in terms of itself. The program must always make progress toward a stopping case, or it will keep calling itself forever.
+A concrete type is one exact type rather than a family of possible types. It has a fixed interpretation in the program and does not depend on later substitution of a placeholder.
 
 ## Memory rule
 
-- base case = stop
-- recursive case = smaller problem
-- no base case = infinite recursion
+- concrete = exact type
+- generic = type still open
+- `T` = placeholder
 
 ## Quick check
 
-- What is the base case for factorial?
-- Why does recursion need a smaller input?
-- When might Python recursion be a poor choice?
-- What makes recursion structural?
+- Is `int` concrete?
+- Is `T` concrete?
+- Why is `list[int]` more specific than `list[T]`?
+- Why do concrete types matter in APIs?
 
 ## Short exam answer
 
-Recursion is a technique where a function solves a problem by calling itself on a smaller version of the same problem. A recursive function needs a base case to stop and a recursive case to move toward that stop. It is useful for nested or self-similar data.
+A concrete type is a fully known type with no unresolved type variables. Examples include `int`, `bool`, `str`, and specific classes like `Student`. Concrete types are useful because they clearly define what kind of value a program is working with.
 
 ---
 

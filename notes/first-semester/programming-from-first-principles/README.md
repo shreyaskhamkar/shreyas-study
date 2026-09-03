@@ -22,20 +22,20 @@ Finish the memory rules and self-check before reading the answers.
 
 | Module | Topic | File |
 |---|---|---|
-| 1 | Data types and collections | [Module 1](Module-1.md) |
-| 2 | Higher-order functions | [Module 2](Module-2.md) |
-| 3 | Standard constructs | [Module 3](Module-3.md) |
-| 4 | Iteration and lazy evaluation | [Module 4](Module-4.md) |
-| 5 | Anonymous functions and lambda calculus | [Module 5](Module-5.md) |
-| 6 | First-class functions | [Module 6](Module-6.md) |
+| 1 | Standard constructs | [Module 1](Module-1.md) |
+| 2 | Standard data types | [Module 2](Module-2.md) |
+| 3 | Calculus | [Module 3](Module-3.md) |
+| 4 | First-class-ness | [Module 4](Module-4.md) |
+| 5 | Higher-order functions | [Module 5](Module-5.md) |
+| 6 | Laziness | [Module 6](Module-6.md) |
 | 7 | Type discipline | [Module 7](Module-7.md) |
-| 8 | Type hints and inference | [Module 8](Module-8.md) |
-| 9 | User-defined types | [Module 9](Module-9.md) |
-| 10 | Concrete types | [Module 10](Module-10.md) |
-| 11 | Recursion | [Module 11](Module-11.md) |
-| 12 | Operational semantics | [Module 12](Module-12.md) |
-| 13 | Protocols and shared behavior | [Module 13](Module-13.md) |
-| 14 | Polymorphism | [Module 14](Module-14.md) |
+| 8 | Polymorphism | [Module 8](Module-8.md) |
+| 9 | Inference | [Module 9](Module-9.md) |
+| 10 | User-defined types | [Module 10](Module-10.md) |
+| 11 | Concrete types | [Module 11](Module-11.md) |
+| 12 | Recursion | [Module 12](Module-12.md) |
+| 13 | Operational semantics | [Module 13](Module-13.md) |
+| 14 | Type classes | [Module 14](Module-14.md) |
 
 ## Support Material
 

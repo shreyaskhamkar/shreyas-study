@@ -1,102 +1,109 @@
-# Module 12: Operational Semantics
+# Module 12: Recursion
 
 [← Previous: Module 11](<Module-11.md>) · [Subject index](README.md) · [Next: Module 13 →](<Module-13.md>)
 
 ## Learning outcomes
 
-- describe execution as step-by-step evaluation;
-- trace a simple Python expression;
-- explain why order of evaluation matters;
-- connect evaluation rules to program behavior.
+- write a recursive Python function;
+- explain base case and recursive case;
+- trace a recursion step by step;
+- decide when recursion is a good fit.
 
 ## Prerequisites
 
-Read [Module 11](Module-11.md) first. You should understand recursion and step-by-step reasoning.
+Complete [Module 11](Module-11.md) first. You should understand concrete and generic types.
 
 ## The idea in one sentence
 
-Operational semantics explains how a program runs by describing what happens at each evaluation step.
+Recursion solves a problem by calling the same function on a smaller version of the problem.
 
 ## Everyday analogy
 
-Think of following a cooking recipe. Each step changes the state of the dish until the final meal is ready.
+Think of a set of nested boxes. To find the smallest item, you open one box, then the smaller box inside it, then the smaller one inside that.
 
 ## Syntax
 
 ```python
-result = (2 + 3) * 4
+def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n - 1)
 ```
 
 ## Worked example
 
-```text
-(2 + 3) * 4 -> 5 * 4 -> 20
+```python
+factorial(3)
+# 3 * factorial(2)
+# 3 * 2 * factorial(1)
+# 3 * 2 * 1 * factorial(0)
+# 6
 ```
 
 Step by step:
 
-1. Compute the inner addition first.
-2. Replace `(2 + 3)` with `5`.
-3. Multiply `5 * 4`.
-4. Final result is `20`.
+1. `factorial(3)` needs `3 * factorial(2)`.
+2. `factorial(2)` needs `2 * factorial(1)`.
+3. `factorial(1)` needs `1 * factorial(0)`.
+4. `factorial(0)` returns `1`.
+5. The results combine back to `6`.
 
 ## Why this matters in practice
 
-- In college notes, operational semantics shows how to reason about execution.
-- In real code, it helps you understand why order, side effects, and function calls matter.
-- It is useful when debugging and when studying how interpreters work.
+- In college notes, recursion shows how one problem can be broken into smaller ones.
+- In real code, it is common in trees, folder traversal, and divide-and-conquer algorithms.
+- It gives a clean way to describe nested or self-similar data.
 
 ## Important concepts
 
-### Syntax
+### Base case
 
-Syntax is how code is written.
-
-```python
-value = 10
-```
-
-### Semantics
-
-Semantics is what the code means when it runs.
-
-### Reduction
-
-Reduction is one evaluation step.
-
-```text
-2 + 3 -> 5
-```
-
-### Stack frame
-
-A function call creates a new stack frame.
+The base case stops the recursion.
 
 ```python
-def add(x, y):
-    return x + y
+if n == 0:
+    return 1
+```
+
+### Recursive case
+
+The recursive case makes the problem smaller.
+
+```python
+return n * factorial(n - 1)
+```
+
+### Structural recursion
+
+Structural recursion follows the shape of the data, such as a list.
+
+```python
+def total(items):
+    if not items:
+        return 0
+    return items[0] + total(items[1:])
 ```
 
 ## Technical meaning
 
-Operational semantics is a formal description of computation. It explains how expressions are transformed into simpler expressions until a final result is reached. This gives a precise model of program execution.
+Recursion is a way to define a computation in terms of itself. The program must always make progress toward a stopping case, or it will keep calling itself forever.
 
 ## Memory rule
 
-- syntax = form
-- semantics = behavior
-- reduction = step-by-step evaluation
+- base case = stop
+- recursive case = smaller problem
+- no base case = infinite recursion
 
 ## Quick check
 
-- What is the result of `(2 + 3) * 4`?
-- Why does evaluation order matter?
-- What does a function call create?
-- Why is operational semantics useful in debugging?
+- What is the base case for factorial?
+- Why does recursion need a smaller input?
+- When might Python recursion be a poor choice?
+- What makes recursion structural?
 
 ## Short exam answer
 
-Operational semantics describes how a program executes by showing each evaluation step. It explains the meaning of code through reduction, evaluation order, and function-call behavior. This helps programmers reason about how expressions become final results.
+Recursion is a technique where a function solves a problem by calling itself on a smaller version of the same problem. A recursive function needs a base case to stop and a recursive case to move toward that stop. It is useful for nested or self-similar data.
 
 ---
 

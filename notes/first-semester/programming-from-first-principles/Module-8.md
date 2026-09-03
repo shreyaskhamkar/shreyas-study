@@ -1,25 +1,25 @@
-# Module 8: Type Hints and Inference
+# Module 8: Polymorphism
 
 [← Previous: Module 7](<Module-7.md>) · [Subject index](README.md) · [Next: Module 9 →](<Module-9.md>)
 
 ## Learning outcomes
 
-- explain what type hints do in Python;
-- understand how tools infer local types;
-- read a simple inferred type from code;
-- use `TypeVar` in a basic generic example.
+- explain how one function can work with many types;
+- read a generic Python example;
+- distinguish parametric and behavior-based polymorphism;
+- connect polymorphism with reusable code.
 
 ## Prerequisites
 
-Read [Module 7](Module-7.md) first. You should understand dynamic typing and type hints.
+Complete [Module 7](Module-7.md) first. You should understand type discipline and the difference between concrete and generic types.
 
 ## The idea in one sentence
 
-Type hints describe expected types, while type inference is the process of working out types from the code itself.
+Polymorphism means one piece of code can work in many forms without changing its core logic.
 
 ## Everyday analogy
 
-Think of a teacher marking a notebook. Sometimes the notebook already has labels written on it. Other times the teacher can still guess the meaning from the examples inside.
+Think of a universal remote. The same button press can control a TV, fan, or AC because each device understands the same idea in its own way.
 
 ## Syntax
 
@@ -28,78 +28,79 @@ from typing import TypeVar
 
 T = TypeVar("T")
 
-def identity(x: T) -> T:
-    return x
+def first(items: list[T]) -> T:
+    return items[0]
 ```
 
 ## Worked example
 
 ```python
-numbers = [1, 2, 3]
-first = numbers[0]
+first([10, 20, 30])
+first(["a", "b", "c"])
 ```
 
 Step by step:
 
-1. `numbers` is a list of integers.
-2. `numbers[0]` gives the first item.
-3. A type checker can infer that `first` is an `int`.
+1. The same function is used for numbers.
+2. The same function is used for text.
+3. The function logic does not change.
+4. Only the type of input changes.
 
 ## Why this matters in practice
 
-- In college notes, type hints help explain intent without changing runtime behavior.
-- In real code, tools use hints to catch mistakes before they become bugs.
-- Inference reduces repeated typing while still keeping code readable.
+- In college notes, polymorphism shows how generic code stays reusable.
+- In real code, it helps with helper functions, containers, and behavior-based APIs.
+- It reduces duplication because one design can serve many types.
 
 ## Important concepts
 
-### Type hint
+### Parametric polymorphism
 
-A type hint tells readers and tools what kind of value is expected.
+Parametric polymorphism uses a type variable such as `T`.
 
 ```python
-def greet(name: str) -> str:
-    return "Hello " + name
+def echo(value: T) -> T:
+    return value
 ```
 
-### Inference
+### Behavior-based polymorphism
 
-Inference is the process of deriving a type from usage.
+Different types can support the same operation.
 
 ```python
-count = 10
+len("abc")
+len([1, 2, 3])
 ```
 
-Here a tool can infer that `count` is an `int`.
+### Generic function
 
-### `TypeVar`
-
-`TypeVar` is a placeholder for a generic type.
+A generic function works with more than one type.
 
 ```python
-T = TypeVar("T")
+def first(items: list[T]) -> T:
+    return items[0]
 ```
 
 ## Technical meaning
 
-Type inference is the process of figuring out the most general type that fits a piece of code. In Python, this is mostly done by type-checking tools rather than by the runtime itself.
+Polymorphism means many forms. In Python, it appears when one function or method works across different types without changing its core logic. This can happen through type variables, shared methods, or operations defined by behavior.
 
 ## Memory rule
 
-- hint = tell the tool what you intend
-- inference = tool works it out from code
-- TypeVar = reusable placeholder for a type
+- parametric = type variable
+- behavior-based = shared operations
+- generic = works for more than one type
 
 ## Quick check
 
-- Does Python enforce most type hints at runtime?
-- What does `T` stand for in the example?
-- Why do type checkers help?
-- What is the difference between a hint and an inference?
+- Why is `first` polymorphic?
+- What type does `T` represent?
+- How does Python support many forms of behavior?
+- Why is polymorphism useful in reusable code?
 
 ## Short exam answer
 
-Type hints describe the intended type of values, and type inference is the process of determining a type from code usage. In Python, hints are mainly for tools and readers, while inference helps reduce repetitive annotations and catch mistakes early.
+Polymorphism means one piece of code can work with many types. In Python, it appears in generic functions that use type variables and in behavior-based code where different objects provide the same operations. It makes programs more reusable and flexible.
 
 ---
 
