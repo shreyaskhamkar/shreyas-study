@@ -1,0 +1,44 @@
+.voice-reader {
+  margin: 0 0 2rem;
+  padding: 1rem 1.1rem .85rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--vp-c-bg-soft), var(--vp-c-bg));
+  box-shadow: 0 8px 24px rgba(20, 33, 61, .06);
+}
+
+.voice-reader__copy {
+  display: flex;
+  align-items: baseline;
+  gap: .65rem;
+  flex-wrap: wrap;
+}
+
+.voice-reader__eyebrow {
+  color: var(--vp-c-brand-1);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.voice-reader__status { color: var(--vp-c-text-2); font-size: .85rem; }
+.voice-reader__position { color: var(--vp-c-text-2); font-size: .8rem; }
+
+.voice-reader__controls { display: flex; align-items: center; gap: .55rem; margin-top: .7rem; flex-wrap: wrap; }
+.voice-reader button, .voice-reader select { font: inherit; }
+.voice-reader button { border-radius: 8px; padding: .42rem .7rem; cursor: pointer; }
+.voice-reader__primary { border: 1px solid var(--vp-c-brand-1); color: var(--vp-c-white); background: var(--vp-c-brand-1); font-weight: 650; }
+.voice-reader__secondary { border: 1px solid var(--vp-c-divider); color: var(--vp-c-text-1); background: var(--vp-c-bg); }
+.voice-reader button:disabled { opacity: .45; cursor: not-allowed; }
+.voice-reader__rate { display: inline-flex; align-items: center; gap: .4rem; color: var(--vp-c-text-2); font-size: .85rem; margin-left: auto; }
+.voice-reader select { border: 1px solid var(--vp-c-divider); border-radius: 7px; padding: .35rem .45rem; color: var(--vp-c-text-1); background: var(--vp-c-bg); }
+.voice-reader__progress { height: 4px; margin-top: .85rem; overflow: hidden; border-radius: 99px; background: var(--vp-c-divider); }
+.voice-reader__progress span { display: block; height: 100%; border-radius: inherit; background: var(--vp-c-brand-1); transition: width .2s ease; }
+.voice-reader__fallback { color: var(--vp-c-text-2); font-size: .85rem; margin: 0 0 2rem; }
+
+@media (max-width: 640px) {
+  .voice-reader__rate { margin-left: 0; }
+  .voice-reader__status { flex-basis: 100%; }
+  .voice-reader__position { flex-basis: 100%; }
+}
