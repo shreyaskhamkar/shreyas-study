@@ -1,10 +1,16 @@
 import { defineConfig } from 'vitepress'
 
-const firstSemester = (title: string, path: string, modules: number[]) => ({
+const firstSemester = (title: string, path: string, modules: number[], hasSemesterPaper = true) => ({
   text: title,
   collapsed: true,
   items: [
     { text: 'Subject overview', link: `/notes/first-semester/${path}/README` },
+    ...(hasSemesterPaper
+      ? [
+          { text: 'Semester question paper', link: `/notes/first-semester/${path}/Semester-Question-Paper` },
+          { text: 'Model answers', link: `/notes/first-semester/${path}/Semester-Question-Paper-Answer-Key` },
+        ]
+      : []),
     ...modules.map((module) => ({
       text: `Module ${module}`,
       link: `/notes/first-semester/${path}/Module-${module}`,
@@ -30,7 +36,7 @@ export default defineConfig({
         { text: 'First Semester', link: '/notes/first-semester/' },
         firstSemester('Artificial Intelligence', 'artificial-intelligence', [1, 2, 3, 4, 5]),
         firstSemester('Computational Mathematics', 'computational-mathematics', [1, 2, 3, 4, 5, 6]),
-        firstSemester('Cyber Security', 'cyber-security', [1, 2, 3, 4]),
+        firstSemester('Cyber Security', 'cyber-security', [1, 2, 3, 4], false),
         firstSemester('Persistent Data Management', 'persistent-data-management', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
         firstSemester('Processor Architecture and Design', 'Processor-Architecture-and-Design', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
         firstSemester('Programming from First Principles', 'programming-from-first-principles', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]),
