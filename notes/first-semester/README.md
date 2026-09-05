@@ -28,6 +28,17 @@ For the source-by-source verification and its limitations, see the
 | Elective Foundations of Artificial Intelligence | [Open subject](artificial-intelligence/README.md) |
 | Research Methodology | [Open subject](research-methodology/README.md) |
 
+## Semester I question papers (70 marks)
+
+| Paper | Question paper | Model answers |
+|---|---|---|
+| OCA-501 MJ — Programming from First Principles | [Question paper](programming-from-first-principles/Semester-Question-Paper.md) | [Model answers](programming-from-first-principles/Semester-Question-Paper-Answer-Key.md) |
+| OCA-502 MJ — Processor Architecture and Design | [Question paper](Processor-Architecture-and-Design/Semester-Question-Paper.md) | [Model answers](Processor-Architecture-and-Design/Semester-Question-Paper-Answer-Key.md) |
+| OCA-503 MJ — Computational Mathematics–I | [Question paper](computational-mathematics/Semester-Question-Paper.md) | [Model answers](computational-mathematics/Semester-Question-Paper-Answer-Key.md) |
+| OCA-504 MJ — Persistent Data Management | [Question paper](persistent-data-management/Semester-Question-Paper.md) | [Model answers](persistent-data-management/Semester-Question-Paper-Answer-Key.md) |
+| OCA-510 MJ — Artificial Intelligence | [Question paper](artificial-intelligence/Semester-Question-Paper.md) | [Model answers](artificial-intelligence/Semester-Question-Paper-Answer-Key.md) |
+| OCA-531 RM — Research Methodology | [Question paper](research-methodology/Semester-Question-Paper.md) | [Model answers](research-methodology/Semester-Question-Paper-Answer-Key.md) |
+
 The Cyber Security folder is retained as additional material, but it is not one
 of the six papers shown in the supplied Semester I timetable.
 
